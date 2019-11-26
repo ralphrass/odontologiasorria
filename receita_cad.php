@@ -52,7 +52,7 @@ xmlhttp.setRequestHeader('encoding','ISO-8859-1');
 
 xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); 
 
-xmlhttp.setRequestHeader('Content-length', strData.length ); 
+//xmlhttp.setRequestHeader('Content-length', strData.length ); 
 
 xmlhttp.send(strData);
 
