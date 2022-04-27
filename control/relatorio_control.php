@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	//include_once('dao/relatorio.php');
 	
 	if (isset($_POST['str_acao']))
@@ -25,7 +25,8 @@
 		{
 			if (isset($_POST['cd_relatorio']) && $_POST['cd_relatorio'] > 0){
 				$relatorio->alterar();
-				mysql_query($relatorio->statement);
+				//mysql_query($relatorio->statement);
+				mysqli_query($_SESSION['db_con'], $relatorio->statement);
 			} 
 			else 
 			{

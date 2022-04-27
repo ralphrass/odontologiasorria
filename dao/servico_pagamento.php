@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 
 require_once('dao.php');
 
@@ -28,7 +28,8 @@ class ServicoPagamento extends DAO
 	{
 		$this->statement = "DELETE FROM ".$this->table." WHERE cd_cliente_servico = ".$cd_cliente_servico;
 		
-		mysql_query($this->statement);
+		//mysql_query($this->statement);
+		mysqli_query($this->db_con, $this->statement);
 	}
 }
 

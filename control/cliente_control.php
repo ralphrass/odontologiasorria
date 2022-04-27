@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	include_once('dao/cliente.php');
 	include_once('dao/cliente_servico.php');
 	
@@ -43,12 +43,16 @@
 			}
 			
 			if (isset($_POST['cd_cliente']) && $_POST['cd_cliente'] > 0){
+			    
 				$cliente->alterar();
-				mysql_query($cliente->statement);
+				//echo "aqui ".$cliente->statement;
+				//mysql_query($cliente->statement);
+				mysqli_query($_SESSION['db_con'], $cliente->statement);
 				
 				if (isset($_POST['cd_cliente_servico']) && $_POST['cd_cliente_servico'] > 0){
 					$servico->alterar();
-					mysql_query($servico->statement);
+					//mysql_query($servico->statement);
+					mysqli_query($_SESSION['db_con'], $servico->statement);
 				} elseif (isset($_POST['sn_contratar'])) {
 					$servico->inserirServico($_POST['cd_cliente']);
 				}

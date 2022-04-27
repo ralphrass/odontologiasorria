@@ -1,6 +1,7 @@
 <?php
 session_start();
 //error_reporting(0);
+//print_r($_SESSION);
 
 require_once('dao/db_con.php');
 

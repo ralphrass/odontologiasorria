@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 session_start();
 
 include 'charts.php';
@@ -33,15 +33,25 @@ while ($p_dt_inicio < $p_dt_final)
 	$sql .= " AND dt_despesa = '".$dt_inicio_formatada."' ";		$sql .= " AND cd_empresa = ".$_SESSION['s_cd_empresa']." ";
 	//echo $sql;
 	
-	$stmtd = mysql_query($sql);
-	$rsd = mysql_fetch_array($stmtd);	if ($rsd['vl_debito'] > 0){
+	//$stmtd = mysql_query($sql);
+	//$rsd = mysql_fetch_array($stmtd);
+	
+	$stmtd = mysqli_query($_SESSION['db_con'], $sql);
+	$rsd = mysqli_fetch_array($stmtd);
+	
+	if ($rsd['vl_debito'] > 0){
 		$arr_desp[$safety_loop] = $rsd['vl_debito'];	}
 	
 	$sql = "SELECT SUM(vl_despesa) AS vl_receita FROM despesa WHERE (tp_fluxo='R' or tp_fluxo = 'C') ";
 	$sql .= " AND dt_despesa = '".$dt_inicio_formatada."' ";	$sql .= " AND cd_empresa = ".$_SESSION['s_cd_empresa']." ";
 	
-	$stmtr = mysql_query($sql);
-	$rsr = mysql_fetch_array($stmtr);	if ($rsr['vl_receita'] > 0){
+	//$stmtr = mysql_query($sql);
+	//$rsr = mysql_fetch_array($stmtr);
+	
+	$stmtr = mysqli_query($_SESSION['db_con'], $sql);
+	$rsr = mysqli_fetch_array($stmtr);
+	
+	if ($rsr['vl_receita'] > 0){
 		$arr_receita[$safety_loop] = $rsr['vl_receita'];
 		$arr_dates[$safety_loop] = $dt_inicio_mostrar;	}	
 	$p_dt_inicio = mktime(0,0,0, substr($_REQUEST['f_dt_inicio'], 3, 2), substr($_REQUEST['f_dt_inicio'], 0, 2)+$safety_loop, substr($_REQUEST['f_dt_inicio'], 6, 4));

@@ -1,6 +1,6 @@
 <script language="javascript" src="js/date_picker.js"></script>
 <LINK href="css/date_picker.css" rel="stylesheet" type="text/css">
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	require_once('dao/usuario.php');
 	
 	$cd_usuario = $cd_tipo_material = $tp_movimento = $dt_movimento = $qt_movimento = $qt_minima = $qt_estoque = "";
@@ -19,7 +19,7 @@
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <table width="100%" border="0" class="tabela_lista">
-<input type="hidden" name="cd_material_movimento" id="cd_material_movimento" value="<?php if (isset($_POST['cd_material_movimento'])) echo $_POST['cd_material_movimento']; ?>"><input type="hidden" name="cd_empresa" value="<?php echo $_SESSION["s_cd_empresa"]; ?>"><?php	if ($qt_minima > 0 && $qt_estoque <= $qt_minima){?>  <tr>	<td colspan="2" align="left" class="warning">		<img src="img/warning.png" style="vertical-align: middle" />		<span style="margin-left: 200px">ATENÇÃO. A Quantidade Mínima do Produto <?php echo "(".$qt_minima.")"; ?> foi atingida. Estoque atual = <?php echo $qt_estoque; ?></span>	</td>  </tr><?php 	}?>
+<input type="hidden" name="cd_material_movimento" id="cd_material_movimento" value="<?php if (isset($_POST['cd_material_movimento'])) echo $_POST['cd_material_movimento']; ?>"><input type="hidden" name="cd_empresa" value="<?php echo $_SESSION["s_cd_empresa"]; ?>"><?php	if ($qt_minima > 0 && $qt_estoque <= $qt_minima){?>  <tr>	<td colspan="2" align="left" class="warning">		<img src="img/warning.png" style="vertical-align: middle" />		<span style="margin-left: 200px">ATENï¿½ï¿½O. A Quantidade Mï¿½nima do Produto <?php echo "(".$qt_minima.")"; ?> foi atingida. Estoque atual = <?php echo $qt_estoque; ?></span>	</td>  </tr><?php 	}?>
   <tr>
     <td colspan="2" align="center" class="tabela_label">Movimentar o Estoque</td>
   </tr>
@@ -28,7 +28,7 @@
     <td class="tabela_linha"><select name="tp_movimento" id="tp_movimento">
       <option value="" selected="selected"></option>
       <option value="E" <?php if ($tp_movimento == 'E') echo "selected=\"selected\""; ?>>Entrada</option>
-      <option value="S" <?php if ($tp_movimento == 'S') echo "selected=\"selected\""; ?>>Saída</option>
+      <option value="S" <?php if ($tp_movimento == 'S') echo "selected=\"selected\""; ?>>Saï¿½da</option>
     </select></td>
   </tr>
   <tr>
@@ -54,7 +54,7 @@
     </td>
   </tr>
   <tr>
-    <td width="181" class="tabela_label">Usuário: </td>
+    <td width="181" class="tabela_label">Usuï¿½rio: </td>
     <td class="tabela_linha">
       <select name="cd_usuario" id="cd_usuario">
       	<option value="" selected="selected"></option>

@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");?>
+<?php ?>
 <form name="orc_filter" method="post" enctype="multipart/form-data" action="">
 <table width="70%" border="0" class="tabela_lista">
   <tr>
@@ -21,7 +21,8 @@ if ($_POST['str_acao'] == 'pes'){
 	}
 	
 	$query .= " order by ds_tipo_material ";
-	$rs = mysql_query($query) or die(mysql_error());
+	//$rs = mysql_query($query) or die(mysql_error());
+	$rs = mysqli_query($_SESSION['db_con'], $query);
 ?>
 <input type="hidden" name="cd_tipo_material" id="cd_tipo_material">
 <table width="70%" border="0" class="tabela_lista">
@@ -31,7 +32,8 @@ if ($_POST['str_acao'] == 'pes'){
     <td width="5%" class="tabela_label">Editar</td>
   </tr>
  <?php 
-	while($row = mysql_fetch_array($rs))
+	//while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
  ?>
       <tr onmouseover="this.bgColor='#66CCCC'" onmouseout="this.bgColor=''">

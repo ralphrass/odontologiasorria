@@ -1,13 +1,15 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	require_once('dao/usuario.php');
 	
 	$nm_usuario = $ds_login = $ds_senha = $sn_usuario_preferencial = "";
 	
 	if (isset($_POST['cd_usuario']) && $_POST['cd_usuario'] > 0){
 		//Carrega os dados do usuario
-		$result = mysql_query($usuario->statement);
+		//$result = mysql_query($usuario->statement);
+		$result = mysqli_query($_SESSION['db_con'], $usuario->statement);
 		
-		$row = mysql_fetch_array($result);
+		//$row = mysql_fetch_array($result);
+		$row = mysqli_fetch_array($result);
 		
 		$nm_usuario = $row['nm_usuario'];
 		$ds_login = $row['ds_login'];
@@ -20,7 +22,7 @@
 <table width="100%" border="0" class="tabela_lista">
 <input type="hidden" name="cd_usuario" id="cd_usuario" value="<?php if (isset($_POST['cd_usuario'])) echo $_POST['cd_usuario']; ?>"><input type="hidden" name="cd_empresa" id="cd_empresa" value="<?php echo $_SESSION['s_cd_empresa']; ?>">
   <tr>
-    <td colspan="4" align="center" class="tabela_label">Dados do Usuário</td>
+    <td colspan="4" align="center" class="tabela_label">Dados do Usuario</td>
   </tr>
   <tr>
     <td width="181" class="tabela_label">Nome do usuario: </td>

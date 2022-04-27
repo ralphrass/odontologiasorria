@@ -58,6 +58,7 @@
 <p><br />
 </p>
 <div>Implementado com: PHP 5.3.0 + MySql 5.1.36 + Apache 2.2.11</div>
+<div>V 1.3.1</div>
 </div>
 </form>
 </body>

@@ -2,83 +2,11 @@
 
 <LINK href="css/date_picker.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript">
-
-function loadXMLDoc(td_name, nr_ficha, tp_grupo)
-
-{
-
-if (window.XMLHttpRequest)
-
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-
-  xmlhttp=new XMLHttpRequest();
-
-  }
-
-else
-
-  {// code for IE6, IE5
-
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-
-  }
-
-xmlhttp.onreadystatechange=function()
-
-  {
-
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-
-    {
-
-    document.getElementById(td_name).innerHTML=xmlhttp.responseText;
-
-    }
-
-  }
-
-  
-
-  var strData = "nr_ficha="+nr_ficha+"&tp_grupo="+tp_grupo;
-
-  
-
-xmlhttp.open("POST","inc/cliente_select.inc.php?"+strData,true);
-
-xmlhttp.setRequestHeader('Content-Type','text/xml'); 
-
-xmlhttp.setRequestHeader('encoding','ISO-8859-1'); 
-
-xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); 
-
-//xmlhttp.setRequestHeader('Content-length', strData.length ); 
-
-xmlhttp.send(strData);
-
-}
+<script language="javascript" src="js/cliente.js"></script>
 
 
 
-function seleciona_cliente()
-
-{
-
-	var td_name = "cliente_select";
-
-	var nr_ficha = document.getElementById('nr_ficha').value;
-
-	var tp_grupo = document.getElementById('tp_despesa_grupo').options[document.getElementById('tp_despesa_grupo').selectedIndex].value;
-
-	loadXMLDoc(td_name, nr_ficha, tp_grupo);
-
-}
-
-</script>
-
-
-
-<?php require_once("php7_mysql_shim.php");
+<?php 
 
 //	require_once('dao/usuario.php');
 
@@ -90,9 +18,11 @@ function seleciona_cliente()
 
 	if (isset($_POST['cd_despesa']) && $_POST['cd_despesa'] > 0){
 
-		$result = mysql_query($despesa->statement);
+        $result = mysqli_query($_SESSION['db_con'], $despesa->statement);
+		//$result = mysql_query($despesa->statement);
 
-		$row = mysql_fetch_array($result);
+		//$row = mysql_fetch_array($result);
+		$row = mysqli_fetch_array($result);
 
 		
 
@@ -128,9 +58,12 @@ function seleciona_cliente()
 
 		$sqlFicha = "SELECT ".$ds_ficha." FROM cliente WHERE cd_cliente = ".$cd_cliente;
 
-		$resultFicha = mysql_query($sqlFicha);
+		//$resultFicha = mysql_query($sqlFicha);
 
-		$rowFicha = mysql_fetch_array($resultFicha);
+		//$rowFicha = mysql_fetch_array($resultFicha);
+		
+		$resultFicha = mysqli_query($_SESSION['db_con'], $sqlFicha);
+		$rowFicha = mysqli_fetch_array($resultFicha);
 
 		$nr_ficha = $rowFicha[$ds_ficha];
 
@@ -237,11 +170,13 @@ function seleciona_cliente()
 
 				  ORDER BY nm_cliente ";
 
-		$rs_u = mysql_query($sql_u);
+		//$rs_u = mysql_query($sql_u);
+		$rs_u = mysqli_query($_SESSION['db_con'], $sql_u);
 
 		$selected = "";
 
-		while($row_u = mysql_fetch_array($rs_u)){
+		//while($row_u = mysql_fetch_array($rs_u)){
+		while($row_u = mysqli_fetch_array($rs_u)){
 
 			if ($cd_cliente == $row_u['cd_cliente']){
 
@@ -278,7 +213,7 @@ function seleciona_cliente()
   	<td class="tabela_linha">
   		<select name="forma_pagamento" id="forma_pagamento">
   			<option value=""></option>
-  			<option value="Cartao" <?php if ($forma_pagamento == 'Cartao') echo "selected=\"selected\""; ?>>Cartão</option>
+  			<option value="Cartao" <?php if ($forma_pagamento == 'Cartao') echo "selected=\"selected\""; ?>>Cartï¿½o</option>
   			<option value="Cheque" <?php if ($forma_pagamento == 'Cheque') echo "selected=\"selected\""; ?>>Cheque</option>
   			<option value="Dinheiro" <?php if ($forma_pagamento == 'Dinheiro') echo "selected=\"selected\""; ?>>Dinheiro</option>
   		</select>

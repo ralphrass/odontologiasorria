@@ -2,7 +2,7 @@
 
 <LINK href="css/date_picker.css" rel="stylesheet" type="text/css">
 
-<form name="orc_filter" method="post" enctype="multipart/form-data" action="<?php require_once("php7_mysql_shim.php");=$PHP_SELF?>">
+<form name="orc_filter" method="post" enctype="multipart/form-data" action="<?php =$PHP_SELF?>">
 
 <table width="100%" border="0" class="tabela_lista">
 
@@ -140,7 +140,7 @@ if ($_POST['str_acao'] == 'pes'){
 		<td class="tabela_linha" align="right"><strong><?php echo "R$ ".formata_numero_mostrar($total_despesa); ?></strong></td>
 	</tr>
 	<tr>
-		<td class="tabela_label">Balanço</td>
+		<td class="tabela_label">Balanï¿½o</td>
 		<td class="tabela_linha" align="right" style="color: <?php echo $font_color_balanco; ?>"><strong><?php echo "R$ ".formata_numero_mostrar($total_balanco); ?></strong></td>
 	</tr>
 </table>
@@ -185,7 +185,7 @@ if ($_POST['str_acao'] == 'pes'){
 
         <td class="tabela_linha"><?php echo "R$ ".formata_numero_mostrar($row['vl_despesa']); ?></td>
 
-        <td class="tabela_linha"><?php if ($row['dt_pagamento'] && $row['dt_pagamento'] != "0000-00-00") echo "Sim"; else echo "Não"; ?></td>        
+        <td class="tabela_linha"><?php if ($row['dt_pagamento'] && $row['dt_pagamento'] != "0000-00-00") echo "Sim"; else echo "Nï¿½o"; ?></td>        
 
       </tr>
 

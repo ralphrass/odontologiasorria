@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	include_once('dao/despesa.php');
 	include_once('dao/cliente_servico.php');
 	
@@ -44,7 +44,8 @@
 			
 			if (isset($_POST['cd_despesa']) && $_POST['cd_despesa'] > 0){
 				$despesa->alterar();
-				mysql_query($despesa->statement);
+				//mysql_query($despesa->statement);
+				mysqli_query($_SESSION['db_con'], $despesa->statement);
 			} 
 			else 
 			{

@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	require_once('dao/cliente.php');
 	
 	$nm_cliente = $ds_endereco = $ds_telefone_residencial = $ds_telefone_celular = $nr_rg = $nr_cpf = $ds_ficha = $dt_nascimento = "";

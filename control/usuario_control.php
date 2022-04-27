@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	include_once('dao/usuario.php');
 	
 	if (isset($_POST['str_acao']))
@@ -30,6 +30,7 @@
 			{
 				$usuario->alterar();
 				mysql_query($usuario->statement);
+				mysqli_query($_SESSION['db_con'], $usuario->statement);
 			} 
 			else 
 			{

@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	include_once('dao/cliente.php');
 	include_once('dao/cliente_servico.php');
 	include_once('dao/servico_pagamento.php');

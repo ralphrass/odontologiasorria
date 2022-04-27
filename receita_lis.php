@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php"); ?>
+<?php  ?>
 <script language="javascript" src="js/date_picker.js"></script>
 <LINK href="css/date_picker.css" rel="stylesheet" type="text/css">
 <form name="orc_filter" method="post" enctype="multipart/form-data" action="">
@@ -97,7 +97,8 @@ if ($_POST['str_acao'] == 'pes'){
 	
 	$query .= " order by d.tp_fluxo, d.dt_despesa DESC, u.nm_usuario ";
 //echo $query;
-	$rs = mysql_query($query) or die(mysql_error());
+	//$rs = mysql_query($query) or die(mysql_error());
+	$rs = mysqli_query($_SESSION['db_con'], $query);
 ?>
 <input type="hidden" name="cd_despesa" id="cd_despesa">
 <table width="100%" border="0" class="tabela_lista">
@@ -114,7 +115,8 @@ if ($_POST['str_acao'] == 'pes'){
   </tr>
  <?php 
  	$vl_balanco = 0;
-	while($row = mysql_fetch_array($rs))
+ 	while($row = mysqli_fetch_array($rs))
+	//while($row = mysql_fetch_array($rs))
 	{
  ?>
       <tr onmouseover="this.bgColor='#66CCCC'" onmouseout="this.bgColor=''">

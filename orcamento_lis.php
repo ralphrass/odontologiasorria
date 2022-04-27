@@ -1,4 +1,4 @@
-<form name="orc_filter" method="post" enctype="multipart/form-data" action="<?php require_once("php7_mysql_shim.php");=$PHP_SELF?>">
+<form name="orc_filter" method="post" enctype="multipart/form-data" action="<?php =$PHP_SELF?>">
 <table width="70%" border="0" cellpadding="1" cellspacing="0" class="tabela_lista"> 
   <tr>
     <td width="22%" class="tabela_label">Nome do Cliente:</td>
@@ -38,7 +38,8 @@ if ($_POST['str_acao'] == 'pes'){
 	}
 	
 	$query .= " order by nm_cliente, dt_servico desc ";
-	$rs = mysql_query($query) or die(mysql_error());
+	//$rs = mysql_query($query) or die(mysql_error());
+	$rs = mysqli_query($_SESSION['db_con'], $query);
 ?>
 <input type="hidden" name="cd_cliente" id="cd_cliente">
 <input type="hidden" name="cd_cliente_servico" id="cd_cliente_servico">
@@ -51,7 +52,8 @@ if ($_POST['str_acao'] == 'pes'){
     <td class="tabela_label" width="42">Editar</td>
   </tr>
  <?php 
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
+	//while($row = mysql_fetch_array($rs))
 	{
  ?>
       <tr>

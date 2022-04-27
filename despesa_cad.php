@@ -74,7 +74,7 @@ function seleciona_servicos_cliente(cd_cliente, cd_cliente_servico)
 
 
 
-<?php require_once("php7_mysql_shim.php");
+<?php 
 
 	require_once('dao/usuario.php');
 
@@ -86,10 +86,11 @@ function seleciona_servicos_cliente(cd_cliente, cd_cliente_servico)
 
 	if (isset($_POST['cd_despesa']) && $_POST['cd_despesa'] > 0){
 
-		$result = mysql_query($despesa->statement);
-
-		$row = mysql_fetch_array($result);
-
+		//$result = mysql_query($despesa->statement);
+		//$row = mysql_fetch_array($result);
+		
+		$result = mysqli_query($_SESSION['db_con'], $despesa->statement);
+		$row = mysqli_fetch_array($result);
 		
 
 		$cd_usuario = $row['cd_usuario'];
@@ -214,7 +215,7 @@ function seleciona_servicos_cliente(cd_cliente, cd_cliente_servico)
   	<td class="tabela_linha">
   		<select name="forma_pagamento" id="forma_pagamento">
   			<option value=""></option>
-  			<option value="Cartao" <?php if ($forma_pagamento == 'Cartao') echo "selected=\"selected\""; ?>>Cartão</option>
+  			<option value="Cartao" <?php if ($forma_pagamento == 'Cartao') echo "selected=\"selected\""; ?>>Cartï¿½o</option>
   			<option value="Cheque" <?php if ($forma_pagamento == 'Cheque') echo "selected=\"selected\""; ?>>Cheque</option>
   			<option value="Dinheiro" <?php if ($forma_pagamento == 'Dinheiro') echo "selected=\"selected\""; ?>>Dinheiro</option>  			
   		</select>

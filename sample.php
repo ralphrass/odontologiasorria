@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 session_start();
 
 //print_r($_REQUEST);

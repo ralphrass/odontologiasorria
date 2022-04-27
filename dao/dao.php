@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 //session_start();
 //print_r($_POST);
 class DAO
@@ -38,9 +38,11 @@ class DAO
 		
 		$this->statement .= $sql.")";
 //echo $this->statement;		
-		mysql_query($this->statement,$this->db_con);
+		//mysql_query($this->statement,$this->db_con);
+		mysqli_query($this->db_con, $this->statement);
 		
-		$_SESSION[$this->pk] = mysql_insert_id();
+		//$_SESSION[$this->pk] = mysql_insert_id();
+		$_SESSION[$this->pk] = mysqli_insert_id($this->db_con);
 	}
 	
 	function une_valores_insert($arr_val, $test_for_insert=false)
@@ -111,7 +113,8 @@ class DAO
 	{
 		$this->statement = "DELETE FROM ".$this->table." WHERE ".$this->pk." = '".$_POST[$this->pk]."' ";
 		
-		mysql_query($this->statement) or die("Impossível excluir o cliente!");
+		//mysql_query($this->statement) or die("Impossï¿½vel excluir o cliente!");
+		mysqli_query($this->db_con, $this->statement);
 	}
 	
 	function listar()

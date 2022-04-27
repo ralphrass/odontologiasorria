@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 header("Content-type: text/xml; charset=ISO-8859-1");
 print '<?xml version="1.0" encoding="ISO-8859-1"?>';
 ?>
@@ -12,8 +12,11 @@ print '<?xml version="1.0" encoding="ISO-8859-1"?>';
 			AND vl_saldo > 0 
 			AND sn_contratar = 'S' 
 			ORDER BY dt_servico DESC ";
-	$rs = mysql_query($sql);
-	while ($row = mysql_fetch_array($rs))
+	//$rs = mysql_query($sql);
+	$rs = mysqli_query($_SESSION['db_con'], $sql);
+	
+	while ($row = mysqli_fetch_array($rs))
+	//while ($row = mysql_fetch_array($rs))
 	{
 		$selected = (isset($_REQUEST['cd_cliente_servico']) && $_REQUEST['cd_cliente_servico'] == $row['cd_cliente_servico'])?"selected=\"selected\"":"";
 		echo "<option value=\"".$row['cd_cliente_servico']."\" ".$selected.">".formata_data_mostrar($row['dt_servico'])." - ".$row['ds_servico']." - (R$ ".formata_numero_mostrar($row['vl_saldo']).")</option>";

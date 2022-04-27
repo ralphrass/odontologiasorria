@@ -1,0 +1,7 @@
+default_charset = "utf-8"
+
+
+
+; Adicionado pelo Painel de Controle
+
+session.auto_start = 0

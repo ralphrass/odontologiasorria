@@ -1,4 +1,7 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
+
+error_reporting(E_ALL);
+
 session_start();
 
 include('dao/db_con.php');
@@ -7,8 +10,26 @@ $sql = "SELECT cd_usuario, sn_usuario_preferencial
 		FROM usuario 
 		WHERE ds_login = '".$_POST['ds_login']."' 
 		AND ds_senha = '".$_POST['ds_senha']."' 				AND cd_empresa = '".$_POST['empresa']."' ";
-$result = mysql_query($sql);
-$row = mysql_fetch_array($result);
+
+//$result = mysql_query($sql);
+
+//echo "aqui ".$_SESSION['db_con'];
+//echo "aqiuo 2";
+//print_r($_SESSION);
+
+$stmt = $_SESSION['db_con']->prepare('SELECT cd_usuario, sn_usuario_preferencial FROM usuario WHERE ds_login = ? AND ds_senha = ? AND cd_empresa = ?');
+$stmt->bind_param('ssi', $_POST['ds_login'], $_POST['ds_senha'], $_POST['empresa']);
+
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+$row = mysqli_fetch_array($result);
+
+
+
+
+//$row = mysql_fetch_array($result);
 
 if ($row['cd_usuario'] > 0)
 {

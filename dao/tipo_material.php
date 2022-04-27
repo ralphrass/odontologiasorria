@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 
 require_once('dao.php');
 
@@ -21,8 +21,11 @@ class TipoMaterial extends DAO
 	{
 		$sql = "SELECT qt_movimento, tp_movimento FROM material_movimento WHERE cd_material_movimento = ".$cd_material_movimento;
 		
-		$stmt = mysql_query($sql);
-		$rs = mysql_fetch_array($stmt);
+		$stmt = mysqli_query($this->db_con, $sql);
+		$rs = mysqli_fetch_array($stmt);
+		
+		//$stmt = mysql_query($sql);
+		//$rs = mysql_fetch_array($stmt);
 		
 		$tp_movimento = ($rs['tp_movimento']=='E')?'S':'E';
 		
@@ -37,7 +40,8 @@ class TipoMaterial extends DAO
 		
 		$sql = "UPDATE tipo_material SET qt_estoque = ".$tp_atualizacao." WHERE qt_estoque > 0 AND cd_tipo_material = ".$cd_tipo_material;
 
-		mysql_query($sql);
+		//mysql_query($sql);
+		mysqli_query($this->db_con, $sql);
 	}
 }
 ?>

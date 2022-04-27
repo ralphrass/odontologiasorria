@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	header("Content-type: text/xml; charset=ISO-8859-1");
     print '<?xml version="1.0" encoding="ISO-8859-1"?>';
 	include ("dao/db_con.php");
@@ -8,7 +8,8 @@
 		$sql = "SELECT cd_cliente_servico, dt_servico, ds_servico, vl_servico, sn_contratar, vl_saldo 
 				FROM cliente_servico WHERE cd_cliente = ".$_REQUEST['cd_cliente']."
 				ORDER BY dt_servico DESC ";
-		$rs = mysql_query($sql);
+		//$rs = mysql_query($sql);
+		$rs = mysqli_query($_SESSION['db_con'], $sql);
 	}
 ?>
 <table width="100%" border="0" class="tabela_lista">
@@ -22,7 +23,8 @@
   </tr>
   <?php
   $vl_total = $vl_saldo_total = 0;
-  while ($row = mysql_fetch_array($rs))
+  //while ($row = mysql_fetch_array($rs))
+  while ($row = mysqli_fetch_array($rs))
   {
   ?>
       <tr>

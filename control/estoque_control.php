@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	include_once('dao/estoque.php');
 	include_once('dao/tipo_material.php');
 	
@@ -31,7 +31,8 @@
 			{
 				$tipo_material->retornaEstoque($_POST['cd_material_movimento'], $_POST['cd_tipo_material']);
 				$estoque->alterar();
-				mysql_query($estoque->statement);
+				//mysql_query($estoque->statement);
+				mysqli_query($_SESSION['db_con'], $estoque->statement);
 			} 
 			else 
 			{

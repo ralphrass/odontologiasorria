@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php"); ?>
+<?php  ?>
 <script language="javascript" src="js/date_picker.js"></script>
 <LINK href="css/date_picker.css" rel="stylesheet" type="text/css">
 <form name="orc_filter" method="post" enctype="multipart/form-data" action="">
@@ -30,7 +30,7 @@
     <td class="tabela_linha"><select name="f_pago" id="f_pago">
       <option value="" selected="selected"></option>
       <option value="S" <?php if (isset($_POST['f_pago']) && $_POST['f_pago'] == 'S') echo "selected=\"selected\""; ?>>Sim</option>
-      <option value="N" <?php if (isset($_POST['f_pago']) &&$_POST['f_pago'] == 'N') echo "selected=\"selected\""; ?>>Não</option>
+      <option value="N" <?php if (isset($_POST['f_pago']) &&$_POST['f_pago'] == 'N') echo "selected=\"selected\""; ?>>Nï¿½o</option>
     </select></td>
     <td class="tabela_label">Nome Cheque:</td>
     <td class="tabela_linha"><input name="f_ds_despesa" id="f_ds_despesa" type="text" size="30" maxlength="200" value="<?php if (isset($_POST['f_ds_despesa'])) echo $_POST['f_ds_despesa']; ?>" /></td>
@@ -86,7 +86,8 @@ if ($_POST['str_acao'] == 'pes'){
 	
 	$query .= " order by d.tp_fluxo, d.dt_despesa DESC, u.nm_usuario ";
 
-	$rs = mysql_query($query) or die(mysql_error());
+	//$rs = mysql_query($query) or die(mysql_error());
+	$rs = mysqli_query($_SESSION['db_con'], $query);
 ?>
 <input type="hidden" name="cd_despesa" id="cd_despesa">
 <table width="100%" border="0" class="tabela_lista">
@@ -102,7 +103,8 @@ if ($_POST['str_acao'] == 'pes'){
   </tr>
  <?php 
  	$vl_balanco = 0;
-	while($row = mysql_fetch_array($rs))
+	//while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
  ?>
       <tr onmouseover="this.bgColor='#66CCCC'" onmouseout="this.bgColor=''">
@@ -112,7 +114,7 @@ if ($_POST['str_acao'] == 'pes'){
         <td class="tabela_linha"><?php if ($row['ds_despesa']) echo $row['ds_despesa']; else echo $row['ds_servico']; ?></td>
         <td class="tabela_linha"><?php echo formata_data_mostrar($row['dt_despesa']); ?></td>
         <td class="tabela_linha"><?php echo "R$ ".formata_numero_mostrar($row['vl_despesa']); ?></td>
-        <td class="tabela_linha"><?php if ($row['dt_pagamento'] && $row['dt_pagamento'] != "0000-00-00") echo "Sim"; else echo "Não"; ?></td>        
+        <td class="tabela_linha"><?php if ($row['dt_pagamento'] && $row['dt_pagamento'] != "0000-00-00") echo "Sim"; else echo "Nï¿½o"; ?></td>        
         <td class="tabela_linha"><img src="img/editar.png" width="16" height="16" onclick="seta_acao_editar_despesa('edi', '<?php echo $row['cd_despesa']; ?>')" /></td>
       </tr>
 <?php 

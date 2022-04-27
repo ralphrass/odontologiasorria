@@ -1,6 +1,6 @@
-<?php require_once("php7_mysql_shim.php"); 
+<?php // 
 session_start();
-header("Content-type: text/xml; charset=ISO-8859-1");
+//header("Content-type: text/xml; charset=ISO-8859-1");
 print '<?xml version="1.0" encoding="ISO-8859-1"?>';
 require_once('../dao/db_con.php'); 
 
@@ -17,10 +17,12 @@ if (isset($_REQUEST['nr_ficha']) && $_REQUEST['nr_ficha'] > 0 && isset($_REQUEST
 }
 		  
 $sql_u .= "  ORDER BY nm_cliente ";
-$rs_u = mysql_query($sql_u);
+//$rs_u = mysql_query($sql_u);
+$rs_u = mysqli_query($_SESSION['db_con'], $sql_u);
 $selected = "";
-while($row_u = mysql_fetch_array($rs_u)){
-    if ($cd_cliente == $row_u['cd_cliente']){
+//while($row_u = mysql_fetch_array($rs_u)){
+while($row_u = mysqli_fetch_array($rs_u)){
+    if (isset($cd_cliente) && $cd_cliente == $row_u['cd_cliente']){
         $selected = "selected=\"selected\"";
     }
     echo "<option value=".$row_u['cd_cliente']." ".$selected.">".$row_u['nm_cliente']."</option>";

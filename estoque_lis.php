@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");?>
+<?php ?>
 <script language="javascript" src="js/date_picker.js"></script>
 <LINK href="css/date_picker.css" rel="stylesheet" type="text/css">
 <form name="orc_filter" method="post" enctype="multipart/form-data" action="">
@@ -21,7 +21,7 @@
     	<select name="f_tp_movimento" id="f_tp_movimento">
         	<option value="" selected="selected"></option>
             <option value="E" <?php if (isset($_POST['f_tp_movimento']) && $_POST['f_tp_movimento'] == 'E') echo "selected=\"selected\""; ?>>Entrada</option>
-            <option value="S" <?php if (isset($_POST['f_tp_movimento']) && $_POST['f_tp_movimento'] == 'S') echo "selected=\"selected\""; ?>>Saída</option>            
+            <option value="S" <?php if (isset($_POST['f_tp_movimento']) && $_POST['f_tp_movimento'] == 'S') echo "selected=\"selected\""; ?>>SaÃ­da</option>            
         </select>
     </td>
     </tr>
@@ -57,7 +57,8 @@ if ($_POST['str_acao'] == 'pes'){
 	}
 	
 	$query .= " order by dt_movimento DESC ";
-	$rs = mysql_query($query) or die(mysql_error());
+	//$rs = mysql_query($query) or die(mysql_error());
+	$rs = mysqli_query($_SESSION['db_con'], $query);
 ?>
 <input type="hidden" name="cd_material_movimento" id="cd_material_movimento">
 <table width="80%" border="0" class="tabela_lista">
@@ -69,13 +70,14 @@ if ($_POST['str_acao'] == 'pes'){
     <td class="tabela_label" width="36">Editar</td>
   </tr>
  <?php 
-	while($row = mysql_fetch_array($rs))
+	//while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
  ?>
       <tr onmouseover="this.bgColor='#66CCCC'" onmouseout="this.bgColor=''">
         <td class="tabela_linha"><?php echo $row['ds_tipo_material']; ?></td>
         <td class="tabela_linha"><?php echo formata_data_mostrar($row['dt_movimento']); ?></td>
-        <td class="tabela_linha"><?php if ($row['tp_movimento'] == 'E') echo 'Entrada'; elseif($row['tp_movimento'] == 'S') echo 'Saída'; ?></td>
+        <td class="tabela_linha"><?php if ($row['tp_movimento'] == 'E') echo 'Entrada'; elseif($row['tp_movimento'] == 'S') echo 'Saï¿½da'; ?></td>
         <td class="tabela_linha"><?php echo $row['qt_movimento']; ?></td>
         <td class="tabela_linha"><img src="img/editar.png" width="16" height="16" onclick="seta_acao_editar_material_movimento('edi', '<?php echo $row['cd_material_movimento']; ?>')" /></td>
       </tr>

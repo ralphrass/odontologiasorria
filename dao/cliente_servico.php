@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 
 require_once('dao.php');
 
@@ -27,14 +27,16 @@ class ClienteServico extends DAO
 	{
 		$this->statement = "UPDATE cliente_servico SET vl_saldo = vl_saldo - ".$vl_pago." WHERE cd_cliente_servico = ".$cd_cliente_servico;
 		//echo $this->statement;
-		mysql_query($this->statement);
+		//mysql_query($this->statement);
+		mysqli_query($this->db_con, $this->statement);
 	}
 	
 	function retornarSaldo($cd_cliente_servico, $vl_pago)
 	{
 		$this->statement = "UPDATE cliente_servico SET vl_saldo = vl_saldo + ".$vl_pago." WHERE cd_cliente_servico = ".$cd_cliente_servico;
 		//echo $this->statement;
-		mysql_query($this->statement);
+		//mysql_query($this->statement);
+		mysqli_query($this->db_con, $this->statement);
 	}
 }
 

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    //print_r($_SESSION);
+?>
 <script type="text/javascript">
 function loadXMLDoc(td_name, cd_cliente)
 {
@@ -40,7 +44,7 @@ function detalha_servicos(img, cd_cliente)
 		document.getElementById(td_name).style.display = "none";
 	}
 }
-<? require_once("php7_mysql_shim.php"); ?>
+<?  ?>
 </script>
 <form name="orc_filter" method="post" enctype="multipart/form-data" action="">
 <table width="70%" border="0" class="tabela_lista">
@@ -64,7 +68,9 @@ if ($_POST['str_acao'] == 'pes'){
 	}
 	
 	$query .= " order by nm_cliente ";
-	$rs = mysql_query($query) or die(mysql_error());
+	//echo $query;
+	//$rs = mysql_query($query) or die(mysql_error());
+	$rs = mysqli_query($_SESSION['db_con'], $query); // or die(mysqli_error());
 ?>
 <input type="hidden" name="cd_cliente" id="cd_cliente">
 <input type="hidden" name="cd_cliente_servico" id="cd_cliente_servico">
@@ -77,13 +83,16 @@ if ($_POST['str_acao'] == 'pes'){
     <td class="tabela_label" width="44">Editar</td>
   </tr>
  <?php 
-	while($row = mysql_fetch_array($rs))
+	//while($row = mysql_fetch_array($rs))
+	while ($row = mysqli_fetch_array($rs))
 	{
 		$img_name = "img_".$row['cd_cliente'];
 		
 		$sql_saldo = "SELECT SUM(vl_saldo) AS vl_saldo FROM cliente_servico WHERE cd_cliente = ".$row['cd_cliente'];
-	  	$rs_saldo = mysql_query($sql_saldo);
-	  	$row_saldo = mysql_fetch_array($rs_saldo);
+	  	//$rs_saldo = mysql_query($sql_saldo);
+	  	//$row_saldo = mysql_fetch_array($rs_saldo);
+	  	$rs_saldo = mysqli_query($_SESSION['db_con'], $sql_saldo);
+	  	$row_saldo = mysqli_fetch_array($rs_saldo);
  ?>
       <tr onmouseover="this.bgColor='#66CCCC'" onmouseout="this.bgColor=''">
         <td class="tabela_linha"><img src="img/plus.png" style="vertical-align:bottom" id="<?php echo $img_name; ?>" onclick="detalha_servicos(this, '<?php echo $row['cd_cliente']; ?>')" title="plus" /><?php echo $row['nm_cliente']; ?></td>

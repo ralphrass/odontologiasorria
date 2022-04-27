@@ -187,7 +187,7 @@ table, tr, td {
 	document.getElementById('menu_opcao').className = 'invisivel';
 
 	document.getElementById('menu_acao').className = 'invisivel';
-	window.onload = function imprimir(){ self.print(); reload_form(); }
+	window.onload = function imprimir(){ self.print(); setTimeout(reload_form, 1000); }
 	
 
 	</script>"; 

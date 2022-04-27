@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 
 session_start();
 
@@ -22,8 +22,12 @@ class Cliente extends DAO
 	function verificaProximaFicha($ds_ficha)
 	{
 		$sql = "SELECT MAX(".$ds_ficha.") AS ds_ficha FROM cliente WHERE cd_empresa = ".$_SESSION["s_cd_empresa"];
-		$stmt = mysql_query($sql, $this->db_con);
-		$rs = mysql_fetch_array($stmt);
+		//$stmt = mysql_query($sql, $this->db_con);
+		//$rs = mysql_fetch_array($stmt);
+		
+		$stmt = mysqli_query($this->db_con, $sql);
+		$rs = mysqli_fetch_array($stmt);
+		
 		$ds_senha = (isset($rs['ds_ficha']))?($rs['ds_ficha']+1):1;
 
 		return $ds_senha;

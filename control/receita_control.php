@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 
 	include_once('dao/despesa.php');
 
@@ -90,7 +90,8 @@
 
 				$despesa->alterar();
 
-				mysql_query($despesa->statement);
+				//mysql_query($despesa->statement);
+				mysqli_query($_SESSION['db_con'], $despesa->statement);
 
 			} 
 

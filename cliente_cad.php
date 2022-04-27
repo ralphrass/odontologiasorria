@@ -1,6 +1,6 @@
 <script language="javascript" src="js/date_picker.js"></script>
 <LINK href="css/date_picker.css" rel="stylesheet" type="text/css">
-<?php require_once("php7_mysql_shim.php");
+<?php 
 
 	require_once('dao/cliente.php');
 	
@@ -10,8 +10,10 @@
 	$dt_parcela = $vl_parcela = $dt_pagamento = $ds_ficha = $tp_servico = $dt_nascimento = $ds_ficha_orto = "";
 	
 	if (isset($_POST['cd_cliente']) && $_POST['cd_cliente'] > 0){
-		$result = mysql_query($cliente->statement);
-		$row = mysql_fetch_array($result);
+		//$result = mysql_query($cliente->statement);
+		//$row = mysql_fetch_array($result);
+		$result = mysqli_query($_SESSION['db_con'], $cliente->statement);
+		$row = mysqli_fetch_array($result);
 		
 		$nm_cliente = $row['nm_cliente'];
 		$ds_endereco = $row['ds_endereco'];
@@ -23,10 +25,14 @@
 		$ds_ficha = $row['ds_ficha'];
 		$ds_ficha_orto = $row['ds_ficha_orto'];
 		
-		$result = mysql_query($servico->statement);
+		//$result = mysql_query($servico->statement);
+		if ($servico->statement){
+		    $result = mysqli_query($_SESSION['db_con'], $servico->statement);
+		}
 		if ($result)
 		{
-			$row = mysql_fetch_array($result);
+			//$row = mysql_fetch_array($result);
+			$row = mysqli_fetch_array($result);
 			
 			$ds_servico = $row['ds_servico'];
 			$dt_servico = $row['dt_servico'];

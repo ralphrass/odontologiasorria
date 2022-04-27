@@ -1,4 +1,4 @@
-<?php require_once("php7_mysql_shim.php");
+<?php 
 	include_once('dao/tipo_material.php');
 	
 	if (isset($_POST['str_acao']))
@@ -25,7 +25,8 @@
 		{
 			if (isset($_POST['cd_tipo_material']) && $_POST['cd_tipo_material'] > 0){
 				$tipo_material->alterar();
-				mysql_query($tipo_material->statement);
+				//mysql_query($tipo_material->statement);
+				mysqli_query($_SESSION['db_con'], $tipo_material->statement);
 			} 
 			else 
 			{
